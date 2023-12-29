@@ -7,6 +7,7 @@ import axios from 'axios';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [token, setToken]= useState("");
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -26,6 +27,7 @@ const Login = () => {
     try {
         let response= await axios.post(`https://jwt-brand-wick.onrender.com/users/login`,payload);
         console.log(response);
+        setToken(response.data.token);
         setEmail("");
         setPassword("");
        } catch (error) {
@@ -58,8 +60,9 @@ const Login = () => {
         onChange={handlePasswordChange}
       />
       <Button variant="contained" color="primary" onClick={handleLogin}>
-        Login
+      {token ? "Login Successful" : "Login"}
       </Button>
+      
     </form>
   );
 };
