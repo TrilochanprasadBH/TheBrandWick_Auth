@@ -36,6 +36,16 @@ const Login = () => {
     
   };
 
+  const handleLogout = async()=>{
+    try {
+        let response = await axios.get(`https://jwt-brand-wick.onrender.com/users/logout`);
+        console.log(response);
+        setToken("");
+    } catch (error) {
+        console.log(error);
+    }
+  }
+
   return (
     <form>
          <Typography component="h1" variant="h5">
@@ -62,7 +72,9 @@ const Login = () => {
       <Button variant="contained" color="primary" onClick={handleLogin}>
       {token ? "Login Successful" : "Login"}
       </Button>
-      
+      {token? ( <Button variant="contained" color="primary" onClick={handleLogout}>
+      Logout 
+      </Button>):null}
     </form>
   );
 };
